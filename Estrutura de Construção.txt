@@ -1,0 +1,28 @@
+funcionalidades:
+  | |
+  | |
+  | --> Terá funcionalidades práticas e rapidas como:
+  |	 - Download de videos do youtube
+  |      - Download de videos do tiktok
+  |	 - Conversor para mp3
+  |	 - Conversor de imagens
+  |	     | ex: png para jpg, jpeg para jpg
+  |	 - Excluir fundos de fotos
+  |	 - Ferramenta de email temporario
+  |
+  |
+  --> Sub Modulo principal
+	|
+	|
+	--> games
+	     |
+	     |
+	     --> Conterá alguns jogos simples para passar o tempo como:
+		  - Jogo da velha
+		  - Advinhe meu numero (computador)
+
+window:
+ |
+ |
+ --> Conterá a personalização do cmd ou powershell, organização dos dados e
+     o Input para acessar as funcionalidades
