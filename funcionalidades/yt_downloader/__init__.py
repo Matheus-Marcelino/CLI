@@ -1,4 +1,3 @@
-from types import NoneType
 from pytube import YouTube
 from pytube.exceptions import RegexMatchError
 from urllib.error import URLError
@@ -17,7 +16,7 @@ class YouDownTube:
         self.__link: str = link
     
     @Treatment.error_treatment((RegexMatchError), (True, '\033[1;31mLink escrito de forma errada\033[m'))
-    def __capsule(self) -> (bool | NoneType):
+    def __capsule(self) -> (bool | None):
         self.__yt = YouTube(self.__link)
         return True
 
