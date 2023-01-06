@@ -1,9 +1,8 @@
-funcionalidades:
+﻿funcionalidades:
   | |
   | |
   | --> Ter� funcionalidades pr�ticas e rapidas como:
   |	 - Download de videos do youtube
-  |  - Download de videos do tiktok
   |	 - Conversor para mp3
   |	 - Conversor de imagens
   |	     | ex: png para jpg, jpeg para jpg
