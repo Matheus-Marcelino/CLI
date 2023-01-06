@@ -8,3 +8,6 @@ class Treatment:
                     if message[0]:
                         print(message[1])
                     pass
+            return closure
+        return receive_func
+    
