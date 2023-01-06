@@ -14,16 +14,15 @@ from tratamento import Treatment
 
 
 class Converter:
-    """
-    Conversor de extensões
-    """
+    """Conversor de extensões"""
+
     def __init__(self, name_mp4: str) -> None:
         self.__path = name_mp4
         if '.mp4' not in self.__path:
             self.__path = self.__path + '.mp4'
 
     def convert_mp3(self, name_your_mp3: str) -> None:
-        """Converte seu mp4"""
+        """Converte seu mp4 para mp3"""
 
         if '.mp3' not in name_your_mp3:
             name_your_mp3 = name_your_mp3 + '.mp3'
@@ -53,4 +52,3 @@ class Converter:
 if __name__ == '__main__':
     convertor = Converter('amogus.mp4')
     convertor.convert_mp3('audio')
-    pass
