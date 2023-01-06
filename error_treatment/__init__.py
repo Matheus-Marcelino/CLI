@@ -8,8 +8,3 @@ class Treatment:
                     if message[0]:
                         print(message[1])
                     pass
-
-
-if __name__ == '__main__':
-    tratamento = Treatment()
-    tratamento.error_treatment()
