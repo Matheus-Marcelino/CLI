@@ -65,4 +65,4 @@ class Converter:
 
 if __name__ == '__main__':
     conversor = Converter('amogus')
-    print(conversor.convert_mp3('audio.mp3'))
+    print(conversor.convert_mp3('audio'))
