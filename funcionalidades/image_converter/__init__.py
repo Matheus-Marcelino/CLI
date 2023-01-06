@@ -20,6 +20,15 @@ class ImageConverter:
         search: list = os.listdir('input')
         if self.__file in search:
             self.__extension.remove(f"{self.__file.split('.')[1]}")
-            self.__file: list = self.__file.split('.')
         else:
-            return False
+            return ('Sua image não foi encontrada, ' 
+                    'verifique se realmente está na pasta "input"')
+        
+    def converter(self):
+        image = Image.open(self.__file)
+        image_convertida = image.convert('RGB')
+        image_convertida.save(f'{0}')
+
+if __name__ == '__main__':
+    imgc = ImageConverter('unnamed.jpg')
+    imgc.search_file()
