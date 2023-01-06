@@ -86,8 +86,3 @@ class YouDownTube:
         elif self.__yt != None:
             download()
             print('\033[1;32mDownload Feito com sucesso!\033[m')
-
-
-if __name__ == '__main__':
-    yt = YouDownTube('')
-    yt.downloader()
