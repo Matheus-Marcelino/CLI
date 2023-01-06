@@ -24,7 +24,7 @@ class ImageConverter:
         else:
             return ('\033[1;31mSua imagem não foi encontrada, ' 
                     'verifique se realmente está na pasta "input"\033[m')
-        
+
     def converter(self):
         def move_image() -> None:
             try:
@@ -38,7 +38,7 @@ class ImageConverter:
                 if self.__file in search:
                     remove(self.__file)
                     print('\033[1;31mImagem já existente!\033[m')
-                
+
         @Treatment.error_treatment(self, type_of_error=(FileNotFoundError),
                                    message=(True, '\033[1;31mO arquivo não se encontra mais na pasta "input"\033[m'))
         def convert() -> None:
