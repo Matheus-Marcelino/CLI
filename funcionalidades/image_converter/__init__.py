@@ -1,4 +1,4 @@
-from os import listdir, rename, mkdir, remove
+from os import listdir, rename, mkdir, remove, system
 from PIL import Image
 from pathlib import Path
 from sys import path
@@ -55,6 +55,7 @@ class ImageConverter:
             if opc in xts:
                 break
             else:
+                system('cls')
                 print('\033[1;31mOpção inexistente, escolha uma valida!\033[m')
 
         convert()
