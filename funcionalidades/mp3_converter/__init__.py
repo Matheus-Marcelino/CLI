@@ -9,7 +9,7 @@ from os import rename
 from moviepy.editor import *
 from error_treatment import Treatment
 
-Treatment()
+
 class Converter:
     """
     Conversor
