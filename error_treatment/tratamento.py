@@ -10,4 +10,3 @@ class Treatment:
                     pass
             return closure
         return receive_func
-    
