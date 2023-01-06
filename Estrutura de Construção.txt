@@ -1,9 +1,9 @@
 funcionalidades:
   | |
   | |
-  | --> Terá funcionalidades práticas e rapidas como:
+  | --> Terï¿½ funcionalidades prï¿½ticas e rapidas como:
   |	 - Download de videos do youtube
-  |      - Download de videos do tiktok
+  |  - Download de videos do tiktok
   |	 - Conversor para mp3
   |	 - Conversor de imagens
   |	     | ex: png para jpg, jpeg para jpg
@@ -17,12 +17,12 @@ funcionalidades:
 	--> games
 	     |
 	     |
-	     --> Conterá alguns jogos simples para passar o tempo como:
+	     --> Conterï¿½ alguns jogos simples para passar o tempo como:
 		  - Jogo da velha
 		  - Advinhe meu numero (computador)
 
 window:
  |
  |
- --> Conterá a personalização do cmd ou powershell, organização dos dados e
+ --> Conterï¿½ a personalizaï¿½ï¿½o do cmd ou powershell, organizaï¿½ï¿½o dos dados e
      o Input para acessar as funcionalidades
