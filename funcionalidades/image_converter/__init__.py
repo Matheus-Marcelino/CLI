@@ -15,3 +15,11 @@ class ImageConverter:
         self.__file = name_file_image
         self.__extension: list = ['jpg', 'jpeg', 'png']
         #caminho = caminho[:-15] + 'input/' + name_file_image
+
+    def search_file(self) -> (bool | None):
+        search: list = os.listdir('input')
+        if self.__file in search:
+            self.__extension.remove(f"{self.__file.split('.')[1]}")
+            self.__file: list = self.__file.split('.')
+        else:
+            return False
