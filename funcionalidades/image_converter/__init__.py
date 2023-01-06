@@ -39,7 +39,7 @@ class ImageConverter:
                     remove(self.__file)
                     print('\033[1;31mImagem já existente!\033[m')
 
-        @Treatment.error_treatment(self, type_of_error=(FileNotFoundError),
+        @Treatment.error_treatment(type_of_error=(FileNotFoundError),
                                    message=(True, '\033[1;31mO arquivo não se encontra mais na pasta "input"\033[m'))
         def convert() -> None:
             self.__file: str = f'{self.__file[0]}.{opc}'

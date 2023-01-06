@@ -14,8 +14,9 @@ from tratamento import Treatment
 class YouDownTube:
     def __init__(self, link: str) -> None:
         self.__link: str = link
-    
-    @Treatment.error_treatment((RegexMatchError), (True, '\033[1;31mLink escrito de forma errada\033[m'))
+
+    @Treatment.error_treatment(type_of_error=(RegexMatchError), 
+                               message=(True, '\033[1;31mLink escrito de forma errada\033[m'))
     def __capsule(self) -> (bool | None):
         self.__yt = YouTube(self.__link)
         return True
@@ -24,8 +25,9 @@ class YouDownTube:
         if not self.__capsule():
             return 'error'
 
-        @Treatment.error_treatment((URLError), (True, '\033[1;31mErro de conexão, '
-                                                'Verifique se você está Online!\033[m'))
+        @Treatment.error_treatment(type_of_error=(URLError),
+                                   message=(True, '\033[1;31mErro de conexão, '
+                                            'Verifique se você está Online!\033[m'))
         def validation_input():
             if 'www.youtube.com' not in self.__link[8:23]:
                 return False
@@ -76,12 +78,15 @@ class YouDownTube:
             self.__yt.download(output_path=caminho[:-15] + 'output')
 
         self.__yt = validation_input()
-        if self.__yt:
+        if self.__yt is True:
             print('\033[1;31mLink Invalido! Escreva-o de maneira certa.\033[m')
-            return True
         elif self.__yt is False:
             print('\033[1;31mO dominio não é do youtube!\033[m')
-            return False
         elif self.__yt != None:
             download()
             print('\033[1;32mDownload Feito com sucesso!\033[m')
+
+
+if __name__ == '__main__':
+    yt = YouDownTube('https://www.youtube.com/watch?v=07k3exN1DlI')
+    yt.get_request()
