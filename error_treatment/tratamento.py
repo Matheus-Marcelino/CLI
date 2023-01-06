@@ -9,6 +9,5 @@ class Treatment:
                 except type_of_error:
                     if message[0]:
                         print(message[1])
-                    pass
             return closure
         return receive_func
