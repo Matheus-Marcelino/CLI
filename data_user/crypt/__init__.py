@@ -16,7 +16,7 @@ class HashGenerator:
         text: str = md5(encoded).hexdigest()
         return text
 
-    def one_time_encryption(self, text: str, type: str) -> str:        
+    def one_time_encryption(self, text: str | None, type: str) -> str:
         def save_path() -> None:
             """Cria o arquivo com a criptografia própria"""
             def auxiliar() -> None:  # escreve o arquvio na primeira inicialização
@@ -37,7 +37,7 @@ class HashGenerator:
                 for symbol in punctuation:
                     file.write(f'{symbol}={self.generator_token(complexidade)}\n')
 
-            if not exists('key.txt'):
+            if not exists(f'{path}\coden'):
                 mkdir(f'{path}\coden')
                 auxiliar()
             else:
@@ -57,6 +57,7 @@ class HashGenerator:
                 nonlocal criptografado
                 with open(f'{path}\coden\key.txt', 'r', encoding='utf-8') as file:
                     for letra in text:
+                        file.seek(0,0)
                         for cripto in file:
                             validacao = letra in cripto[:1]
                             if validacao:
@@ -70,8 +71,8 @@ class HashGenerator:
             except FileNotFoundError:
                 save_path()
                 return main()
-        
-        def decrypt(self, text: str) -> str:
+
+        def decrypt(text: str) -> str:
             """Descriptografa o um texto criptografado com a sua key"""
             text = text.strip(' ')
             agrupador = []
@@ -103,17 +104,16 @@ class HashGenerator:
                 save_path()
                 return main()
 
-        if not exists('key.txt'):
-            print('cheguei')
-            save_path()
-
         path: str = dirname(realpath(__file__))
         LETTERS = ' AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'
         complexidade = 10
 
-        if type == 'encrypt':
+        if not exists(f'{path}\coden'):
+            save_path()
+
+        if type == 'encrypt' and text != None:
             return encrypt(text)
-        if type == 'decrypt':
+        if type == 'decrypt' and text != None:
             return decrypt(text)
         if type == 'rewrite':
             save_path()
@@ -121,4 +121,3 @@ class HashGenerator:
 
 if __name__ == "__main__":
     hash = HashGenerator()
-    print(hash.one_time_encryption('secret', 'cript'))
