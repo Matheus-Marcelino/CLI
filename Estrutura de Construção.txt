@@ -2,9 +2,9 @@
   | |
   | |
   | --> Ter� funcionalidades pr�ticas e rapidas como:
-  |	 - Download de videos do youtube
-  |	 - Conversor para mp3
-  |	 - Conversor de imagens
+  |	 * Download de videos do youtube
+  |	 * Conversor para mp3
+  |	 * Conversor de imagens
   |	     | ex: png para jpg, jpeg para jpg
   |	 - Excluir fundos de fotos
   |	 - Ferramenta de email temporario
