@@ -16,7 +16,7 @@ class HashGenerator:
         text: str = md5(encoded).hexdigest()
         return text
 
-    def one_time_encryption(self, text: str, type: str) -> str:
+    def one_time_encryption(self, text: str, type: str) -> str:        
         def save_path() -> None:
             """Cria o arquivo com a criptografia própria"""
             def auxiliar() -> None:  # escreve o arquvio na primeira inicialização
@@ -48,7 +48,7 @@ class HashGenerator:
                 except FileNotFoundError:
                     auxiliar()
 
-        def cript(text: str) -> str:
+        def encrypt(text: str) -> str:
             """Criptografa qualquer texto"""
             separador = []
             criptografado = ''
@@ -71,7 +71,7 @@ class HashGenerator:
                 save_path()
                 return main()
         
-        def descript(self, text: str) -> str:
+        def decrypt(self, text: str) -> str:
             """Descriptografa o um texto criptografado com a sua key"""
             text = text.strip(' ')
             agrupador = []
@@ -103,14 +103,20 @@ class HashGenerator:
                 save_path()
                 return main()
 
+        if not exists('key.txt'):
+            print('cheguei')
+            save_path()
 
         path: str = dirname(realpath(__file__))
         LETTERS = ' AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'
         complexidade = 10
-        if type == 'crypt':
-            return cript(text)
-        if type == 'descrypt':
-            pass
+
+        if type == 'encrypt':
+            return encrypt(text)
+        if type == 'decrypt':
+            return decrypt(text)
+        if type == 'rewrite':
+            save_path()
 
 
 if __name__ == "__main__":
