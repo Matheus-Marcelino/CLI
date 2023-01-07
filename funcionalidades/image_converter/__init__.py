@@ -6,7 +6,6 @@ caminho = str(caminho).replace('\\', '/')
 path.append(caminho)
 from tratamento import Treatment
 
-
 from PIL.Image import open as Open
 from os import listdir, rename, mkdir, remove, system
 
