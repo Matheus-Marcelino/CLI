@@ -63,18 +63,8 @@ class ImageConverter:
 
         convert()
 
-    def remove_bg(self) -> None:
-        self.__file: str = '.'.join(string for string in self.__file)
-        print(self.__file)
-        print(self.__caminho)
-
-        self.__file: str = self.__file + '_sem_fundo'+'.png'
-        remove().save(f'{self.__file}')
-
 
 if __name__ == '__main__':
     imgc = ImageConverter('download.png')
-    a = imgc.search_file()
-    if isinstance(a, NoneType):
-        print('a')
-        imgc.remove_bg()
+    imgc.search_file()
+    imgc.converter()
