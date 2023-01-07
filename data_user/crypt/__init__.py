@@ -70,7 +70,47 @@ class HashGenerator:
             except FileNotFoundError:
                 save_path()
                 return main()
+        
+        def descript(self, text: str) -> str:
+            """Descriptografa o um texto criptografado com a sua key"""
+            text = text.strip(' ')
+            agrupador = []
+            separador = descriptografado = ''
+            mem, mem2 = 0, complexidade
+            # {mem, mem2} usado para avançar pela criptografia no tamanho da complexidade
+            def main():
+                nonlocal mem, mem2, separador, descriptografado
+                with open(f'{path}\coden\key.txt', 'r', encoding='utf-8') as file:
+                    while True:
+                        file.seek(0)
+                        separador = text[mem:mem2]
+                        mem += complexidade
+                        mem2 += complexidade
+                        if separador != '':
+                            for cripto in file:
+                                validacao = separador in cripto[2:]
+                                if validacao:
+                                    agrupador.append(cripto[:1])
+                                    descriptografado = ''.join(agrupador)
+                                    break
+                        else:
+                            break
+                    return descriptografado
 
+            try:
+                return main()
+            except FileNotFoundError:
+                save_path()
+                return main()
+
+
+        path: str = dirname(realpath(__file__))
+        LETTERS = ' AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'
+        complexidade = 10
+        if type == 'crypt':
+            return cript(text)
+        if type == 'descrypt':
+            pass
 
 
 if __name__ == "__main__":
