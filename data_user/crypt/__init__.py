@@ -28,6 +28,49 @@ class HashGenerator:
                     for symbol in punctuation:
                         file.write(f'{symbol}={self.generator_token(complexidade)}\n')
 
+            def conjunto() -> None:  # reescreve o arquivo quando acionado novamente
+                file.seek(0, 0)
+                for digito in digits:
+                    file.write(f'{digito}={self.generator_token(complexidade)}\n')
+                for letra in LETTERS:
+                    file.write(f'{letra}={self.generator_token(complexidade)}\n')
+                for symbol in punctuation:
+                    file.write(f'{symbol}={self.generator_token(complexidade)}\n')
+
+            if not exists('key.txt'):
+                mkdir(f'{path}\coden')
+                auxiliar()
+            else:
+                try:
+                    with open(f'{path}\coden\key.txt', 'r+', encoding='utf-8') as file:
+                        file.truncate(0)
+                        conjunto()
+                except FileNotFoundError:
+                    auxiliar()
+
+        def cript(text: str) -> str:
+            """Criptografa qualquer texto"""
+            separador = []
+            criptografado = ''
+
+            def main() -> str:
+                nonlocal criptografado
+                with open(f'{path}\coden\key.txt', 'r', encoding='utf-8') as file:
+                    for letra in text:
+                        for cripto in file:
+                            validacao = letra in cripto[:1]
+                            if validacao:
+                                separador.append(cripto[2:complexidade+2])
+                                criptografado = ''.join(separador)
+                                break
+                    return criptografado
+
+            try:
+                return main()
+            except FileNotFoundError:
+                save_path()
+                return main()
+
 
 
 if __name__ == "__main__":
