@@ -8,7 +8,6 @@ from tratamento import Treatment
 
 
 from PIL.Image import open as Open
-from types import NoneType
 from os import listdir, rename, mkdir, remove, system
 
 
