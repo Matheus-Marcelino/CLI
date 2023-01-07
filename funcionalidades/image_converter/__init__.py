@@ -1,5 +1,3 @@
-from os import listdir, rename, mkdir, remove, system
-from PIL import Image
 from pathlib import Path
 from sys import path
 caminho = Path(__file__)
@@ -9,21 +7,26 @@ path.append(caminho)
 from tratamento import Treatment
 
 
+from PIL.Image import open as Open
+from types import NoneType
+from os import listdir, rename, mkdir, remove, system
+
+
 class ImageConverter:
     def __init__(self, name_file_image: str) -> None:        
         global caminho
-        self.__file = name_file_image
+        self.__file: str = name_file_image
         self.__extension: list = ['jpg', 'jpeg', 'png']
         self.__caminho = caminho[:-15] + 'input/' + name_file_image
 
-    def search_file(self) -> (bool | None):
+    def search_file(self) -> (str | None):
         search: list = listdir('input')
         if self.__file in search:
             self.__file: list = self.__file.split('.')
-            self.__extension.remove(f"{self.__file[1]}")
+            self.__extension.remove(f"{self.__file[-1]}")
         else:
             return ('\033[1;31mSua imagem não foi encontrada, ' 
-                    'verifique se realmente está na pasta "input"\033[m')
+                  'verifique se realmente está na pasta "input"\033[m')
 
     def converter(self):
         def move_image() -> None:
@@ -43,7 +46,7 @@ class ImageConverter:
                                    message=(True, '\033[1;31mO arquivo não se encontra mais na pasta "input"\033[m'))
         def convert() -> None:
             self.__file: str = f'{self.__file[0]}.{opc}'
-            image = Image.open(self.__caminho)
+            image = Open(self.__caminho)
             image_convertida = image.convert('RGB')
             image_convertida.save(self.__file)
             move_image()
@@ -60,8 +63,18 @@ class ImageConverter:
 
         convert()
 
+    def remove_bg(self) -> None:
+        self.__file: str = '.'.join(string for string in self.__file)
+        print(self.__file)
+        print(self.__caminho)
+
+        self.__file: str = self.__file + '_sem_fundo'+'.png'
+        remove().save(f'{self.__file}')
+
 
 if __name__ == '__main__':
-    imgc = ImageConverter('unnamed.jpg')
-    imgc.search_file()
-    imgc.converter()
+    imgc = ImageConverter('download.png')
+    a = imgc.search_file()
+    if isinstance(a, NoneType):
+        print('a')
+        imgc.remove_bg()
