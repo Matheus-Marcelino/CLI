@@ -117,7 +117,3 @@ class HashGenerator:
             return decrypt(text)
         if type == 'rewrite':
             save_path()
-
-
-if __name__ == "__main__":
-    hash = HashGenerator()
