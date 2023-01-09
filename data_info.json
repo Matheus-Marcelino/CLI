@@ -1,7 +1,10 @@
 {
     "time_used": {
-        "last_accessed": "dd/mm/aaaa",
-        "time_use": "00:00:00"
+        "last_accessed": {
+            "date": "dd/mm/aaaa",
+            "time": "00:00:00"
+        },
+        "usage_time": "00:00:00"
     },
-    "last_accessed_feature": ""
+    "last_used_feature": ""
 }
