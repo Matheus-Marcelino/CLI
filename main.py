@@ -44,9 +44,11 @@ class Main:
 
             print()
             self.__mp3 = ConverterMp3(opcion_retry)
-            self.__mp3.convert_mp3(opcion_retry)
+            if self.__mp3.convert_mp3() != False:
+                sleep(3)
+                break
             sleep(3)
-            break
+            self.__window.clear_terminal()
 
     def init_yt(self):
         self.__yt = YouDownTube('aaa')
