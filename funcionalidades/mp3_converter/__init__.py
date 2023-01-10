@@ -12,7 +12,7 @@ path.append(caminho)
 from tratamento import Treatment
 
 
-class Converter:
+class ConverterMp3:
     """Conversor de extensões"""
     def __init__(self, name_mp4: str) -> None:
         self.__file = name_mp4
