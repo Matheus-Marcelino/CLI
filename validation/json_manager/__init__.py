@@ -7,6 +7,17 @@ class JsonManager():
     def __init__(self) -> None:
         self.__path = Path(__file__)
         self.__path = str(self.__path.parent.parent.parent / 'data_info.json')
+        self.__recovery_data: dict = {
+                               "time_used":{
+                                    "last_accessed":{
+                                        "date": "dd/mm/aaaa",
+                                        "time": "00:00:00"
+                                        },
+                                    "usage_time": "00:00:00"
+                                    },
+                                "last_used_feature": "",
+                                "message": "normal"
+                            }
 
     def read(self) -> dict:
         """Lê o arquivo .json"""
@@ -15,7 +26,8 @@ class JsonManager():
                 obj_json = load(file_json)
         except (FileNotFoundError, JSONDecodeError):
             with open(self.__path, 'w+',encoding='utf-8') as file_error_json:
-                file_error_json.write("""{\n\t"message":"ERROR"\n}""")
+                self.__recovery_data["message"] = 'error'
+                dump(self.__recovery_data, file_error_json, indent=4)
 
         with open(self.__path, encoding='utf-8') as file_json:
                 obj_json = load(file_json)
@@ -29,7 +41,8 @@ class JsonManager():
 
 if __name__ == '__main__':
     js = JsonManager()
-    js.insert({
+    js.read()
+    """js.insert({
                 "time_used":{
                     "last_accessed":{
                         "date": "dd/mm/aaaa",
@@ -40,3 +53,4 @@ if __name__ == '__main__':
                 "last_used_feature": ""
                 }
             )
+    """
