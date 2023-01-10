@@ -1,29 +1,49 @@
-from colorama import init
 from window import Window
-from error_treatment.tratamento import Treatment 
+from colorama import init, Fore
+init(True)
+Window().title(Fore.BLUE + '\033[1mCarregando\033[m', 11, 35, 25)
+
+
+from validation import Calculate_time 
 from validation.crypt import HashGenerator
 from validation.json_manager import JsonManager
+from error_treatment.tratamento import Treatment
 from funcionalidades.yt_downloader import YouDownTube
-from funcionalidades.mp3_converter import ConverterMp3
 from funcionalidades.image_converter import ImageConverter
-init(True)
 
 
 class Main:
     def __init__(self) -> None:
         self.__window = Window()
         self.__json = JsonManager()
-        #self.__hash = HashGenerator()
-        #self.__yt = YouDownTube()
-        #self.__mp3 = ConverterMp3()
-        #self.__imagec = ImageConverter()
-        #elf.__trat = Treatment()
+        self.__hash = HashGenerator()
+        self.__yt = YouDownTube()
+        self.__imgc = ImageConverter()
+        self.__trat = Treatment()
 
+    def init_music_converter(self):
+        from funcionalidades.mp3_converter import ConverterMp3
+        #self.__window.title('Mp3 Converter', 11,35, 25)
+        #self.__mp3 = ConverterMp3()
+
+    def __home(self):
+        self.__window.title(Fore.BLUE + '\033[1mMenu de opções', 11,35, 25)
+        self.__window.table(21)
+        opc: str = str(input('qual você deseja usar: '))
+        match opc:
+            case '1':
+                pass
+                
+
+    @Calculate_time
     def main(self):
-        #while True:
+        while True:
             data = self.__json.read()
-            print(data)
+            self.__home()
+            break
+            
 
 if __name__ == '__main__':
     main = Main()
-    main.main()
+    #main.main()
+    #main.init_music_converter()
