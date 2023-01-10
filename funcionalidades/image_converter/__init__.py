@@ -16,6 +16,7 @@ class ImageConverter:
         self.__file: str = name_file_image
         self.__extension: list = ['jpg', 'jpeg', 'png']
         self.__caminho = caminho[:-15] + 'input/' + name_file_image
+        self.__trat = Treatment()
 
     def search_file(self) -> (str | None):
         search: list = listdir('input')
@@ -40,7 +41,7 @@ class ImageConverter:
                     remove(self.__file)
                     print('\033[1;31mImagem já existente!\033[m')
 
-        @Treatment.error_treatment(type_of_error=(FileNotFoundError),
+        @self.__trat.error_treatment(type_of_error=(FileNotFoundError),
                                    message=(True, '\033[1;31mO arquivo não se encontra mais na pasta "input"\033[m'))
         def convert() -> None:
             self.__file: str = f'{self.__file[0]}.{opc}'

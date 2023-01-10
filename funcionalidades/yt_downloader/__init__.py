@@ -14,8 +14,9 @@ from tratamento import Treatment
 class YouDownTube:
     def __init__(self, link: str) -> None:
         self.__link: str = link
+        self.__trat = Treatment()
 
-    @Treatment.error_treatment(type_of_error=(RegexMatchError), 
+    @self.__trat.error_treatment(type_of_error=(RegexMatchError), 
                                message=(True, '\033[1;31mLink escrito de forma errada\033[m'))
     def __capsule(self) -> (bool | None):
         self.__yt = YouTube(self.__link)
@@ -25,7 +26,7 @@ class YouDownTube:
         if not self.__capsule():
             return 'error'
 
-        @Treatment.error_treatment(type_of_error=(URLError),
+        @self.__trat.error_treatment(type_of_error=(URLError),
                                    message=(True, '\033[1;31mErro de conexão, '
                                             'Verifique se você está Online!\033[m'))
         def validation_input():

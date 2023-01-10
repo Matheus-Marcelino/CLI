@@ -16,6 +16,7 @@ class ConverterMp3:
     """Conversor de extensões"""
     def __init__(self, name_mp4: str) -> None:
         self.__file = name_mp4
+        self.__trat = Treatment()
 
     def __checking(self):
         try:
@@ -33,7 +34,7 @@ class ConverterMp3:
         if '.mp3' not in name_your_mp3[-4:]:
             name_your_mp3 = name_your_mp3 + '.mp3'
 
-        @Treatment.error_treatment((OSError, FileNotFoundError),
+        @self.__trat.error_treatment((OSError, FileNotFoundError),
                                    (True, '\033[1;31mArquivo não encontrado ou pasta não encontrada! '
                                     'Verifique se o arquivo\nestá na pasta "input" ou se a pasta "input" existe.\033[m'))
         def converter() -> bool:

@@ -1,7 +1,7 @@
 """Classe auxiliar"""
 class Treatment:
     """Faz o tratamento de erro"""
-    def error_treatment(type_of_error: tuple, message: tuple[bool, str]):
+    def error_treatment(self, type_of_error: tuple, message: tuple[bool, str]):
         def receive_func(func):
             def closure(*args, **kwgs):
                 try:
