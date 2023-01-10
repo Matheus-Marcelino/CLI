@@ -69,7 +69,7 @@ class Main:
                 print("\n\033[1;31mOs link's não batem digite corretamente!\033[m")
                 link_retry = str(input('Digite o link corretamente: ')).strip()
             return link_retry
-        
+
         def get_video() -> bool:
             while True:
                 self.__window.clear_terminal()
@@ -91,7 +91,7 @@ class Main:
                     sleep(3)
                     self.__window.clear_terminal()
                     return False
-        
+
         while True:
             link: str = validation()
 
