@@ -16,11 +16,12 @@ class YouDownTube:
         self.__link: str = link
         self.__trat = Treatment()
 
-    @self.__trat.error_treatment(type_of_error=(RegexMatchError), 
-                               message=(True, '\033[1;31mLink escrito de forma errada\033[m'))
     def __capsule(self) -> (bool | None):
-        self.__yt = YouTube(self.__link)
-        return True
+        try:
+            self.__yt = YouTube(self.__link)
+            return True
+        except RegexMatchError:
+            print('\033[1;31mLink escrito de forma errada\033[m')            
 
     def get_request(self):
         if not self.__capsule():
