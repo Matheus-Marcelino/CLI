@@ -94,7 +94,7 @@ class Main:
         
         while True:
             link: str = validation()
-            
+
             get_value: bool = get_video()
             if get_value:
                 break
