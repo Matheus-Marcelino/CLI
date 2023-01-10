@@ -77,7 +77,6 @@ class YouDownTube:
             self.__yt.download(output_path=caminho[:-15] + 'output')
 
         self.__yt = validation_input()
-        print(self.__yt)
         if self.__yt is True:
             print('\033[1;31mLink Invalido! Escreva-o de maneira certa.\033[m')
             return 'error'
