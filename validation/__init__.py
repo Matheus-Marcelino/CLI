@@ -12,5 +12,3 @@ def Calculate_time(func):
         time_total = time_final - time_inicial
         return resultado, time_total
     return wrapper
-
-# str(function()[1])[:7]
