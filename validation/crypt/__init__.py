@@ -16,7 +16,7 @@ class HashGenerator:
         text: str = md5(encoded).hexdigest()
         return text
 
-    def one_time_encryption(self, text: str | None, type: str) -> str:
+    def one_time_encryption(self, text: str | None, encryption_type: str) -> str:
         def save_path() -> None:
             """Cria o arquivo com a criptografia própria"""
             def auxiliar() -> None:  # escreve o arquvio na primeira inicialização
@@ -111,9 +111,22 @@ class HashGenerator:
         if not exists(f'{path}\coden'):
             save_path()
 
-        if type == 'encrypt' and text != None:
+        if encryption_type == 'encrypt' and text != None:
             return encrypt(text)
-        if type == 'decrypt' and text != None:
+        if encryption_type == 'decrypt' and text != None:
             return decrypt(text)
-        if type == 'rewrite':
+        if encryption_type == 'rewrite':
             save_path()
+
+    def to_output(self, text: str, encryption_type: str) -> None:
+        out_path = str(dirname(realpath(__file__)))[:-16]
+
+        if not exists(f'{out_path}\output'):
+            mkdir(f'{out_path}\output')
+
+        if not exists(f'{out_path}\output\crypt.txt'):
+            with open(f'{out_path}\output\crypt.txt', 'w+', encoding='utf-8') as file_c:
+                file_c.write(f'{encryption_type}: {text}\n')
+        else:
+            with open(f'{out_path}\output\crypt.txt', 'a', encoding='utf-8') as file_c:
+                file_c.write(f'{encryption_type}: {text}\n')

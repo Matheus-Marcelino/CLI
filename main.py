@@ -1,4 +1,3 @@
-
 from window import Window
 from colorama import init, Fore
 init(True)
@@ -20,10 +19,10 @@ class Main:
         self.__window = Window()
         self.__hash = HashGenerator()
         self.__trat = Treatment()
-        self.__opc_valid: tuple[str] = ('Y', 'S', 'YES', 'SIM')
-        self.__opc_invalid: tuple[str] =  ('NÃO', 'NAO',  'NO', 'NOT')
         self.__json = JsonManager()
         self.__data: dict = self.__json.read()
+        self.__opc_valid: tuple[str] = ('Y', 'S', 'YES', 'SIM')
+        self.__opc_invalid: tuple[str] =  ('NÃO', 'NAO',  'NO', 'NOT')
 
     def __init_music_converter(self):
         def validation():
@@ -149,8 +148,14 @@ class Main:
             else:
                 break
 
+    def init_hash_generator(self):
+        while True:
+            self.__window.title(Fore.WHITE + 'Hash Generator', 11, 37, 25)
+            self.__window.table_hash()
+
     def __home(self, data: dict):
-        def message() -> None:
+        def auxiliary(feature: str) -> None:
+            self.__data["last_used_feature"] = feature
             print(Fore.GREEN + Fore.WHITE + "Entrando...")
             sleep(1.5)
             self.__window.clear_terminal()
@@ -166,13 +171,13 @@ class Main:
         opc: str = str(input('qual você deseja usar: '))
         match opc:
             case '1':
-                message()
+                auxiliary("music_converter")
                 self.__init_music_converter()
             case '2':
-                message()
+                auxiliary("yt_downloader")
                 self.__init_yt_downloader()
             case '3':
-                message()
+                auxiliary("image_converter")
                 self.__init_image_converter()
             case '4':
                 pass
@@ -202,7 +207,8 @@ class Main:
 
 if __name__ == '__main__':
     main = Main()
-    DATA: dict = main.main()
-    HOUR: str = str(DATA[1])[:7]
-    DATA[0]["last_boot"]["usage_time"] = HOUR
-    JsonManager().insert(DATA[0])
+    main.init_hash_generator()
+    #DATA: dict = main.main()
+    #HOUR: str = str(DATA[1])[:7]
+    #DATA[0]["last_boot"]["usage_time"] = HOUR
+    #JsonManager().insert(DATA[0])

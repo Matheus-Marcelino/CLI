@@ -21,3 +21,7 @@ class Window:
               '1: Baixa resolução |  720p, 480p,\n'
               '2: Média resolução |  360p, 240p,\n'
               '3: Alta resolução  |     144p\033[m\n')
+
+    def table_hash(self) -> None:
+        print('\n\033[1;33mQue tipo de criptografia deseja usar?\033[m')
+        print('\033[1m1- Hash MD5  | 2- Criptografia única')
