@@ -22,26 +22,27 @@ class Main:
         self.__opc_valid: tuple[str] = ('Y', 'S', 'YES', 'SIM')
         self.__opc_invalid: tuple[str] =  ('NÃO', 'NAO',  'NO', 'NOT')
 
-    def init_music_converter(self):
+    def __init_music_converter(self):
         def validation():
             self.__window.title(Fore.WHITE + 'Mp3 Converter', 11, 35, 25)
-            print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input"')
-            option = str(input('Digite o nome do arquivo: '))
-            option_verify = str(input(f'O nome "{option}" está correto?[Y/N]: ')).upper().strip()
+            print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
+                  'e de colocar a extensão correta\033[m')
+            file = str(input('Digite o nome do arquivo: '))
+            file_verify = str(input(f'O nome "{file}" está correto?[Y/N]: ')).upper().strip()
 
-            if option_verify in self.__opc_invalid:
+            if file_verify in self.__opc_invalid:
                 while True:
-                    option = str(input('\nDigite o nome do arquivo: '))
-                    option_verify = str(input(f'O nome "{option}" está correto?[Y/N]: ')).upper().strip()
-                    if option_verify in self.__opc_valid:
+                    file = str(input('\nDigite o nome do arquivo: '))
+                    file_verify = str(input(f'O nome "{file}" está correto?[Y/N]: ')).upper().strip()
+                    if file_verify in self.__opc_valid:
                         break
 
-            option_retry = str(input('\nDigite novamente o nome do arquivo: '))
+            file_retry = str(input('\nDigite novamente o nome do arquivo: '))
 
-            while option_retry != option:
+            while file_retry != file:
                 print('\nOs nomes não batem digite corretamente!')
-                option_retry = str(input('Digite o nome correto do arquivo: '))
-            return option_retry
+                file_retry = str(input('Digite o nome correto do arquivo: '))
+            return file_retry
 
         while True:
             get_value: str = validation()
@@ -55,7 +56,7 @@ class Main:
             sleep(3)
             self.__window.clear_terminal()
 
-    def init_yt(self):
+    def __init_yt(self):
         def validation() -> str:
             self.__window.title(Fore.WHITE + 'Youtube Downloader', 11, 33, 25)
             link = str(input('Digite o link: ')).strip()
@@ -105,7 +106,45 @@ class Main:
                 break
 
     def init_image_converter(self):
-        self.__imgc = ImageConverter('aaaa')
+        def validation() -> str:
+            self.__window.title(Fore.WHITE + 'Mp3 Converter', 11, 35, 25)
+            print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
+                  'e de colocar a extensão correta\033[m')
+            file = str(input('Digite o nome do arquivo: '))
+            file_verify = str(input(f'O nome "{file}" está correto?[Y/N]: ')).upper().strip()
+
+            if file_verify in self.__opc_invalid:
+                while True:
+                    file = str(input('\nDigite o nome do arquivo: '))
+                    file_verify = str(input(f'O nome "{file}" está correto?[Y/N]: ')).upper().strip()
+                    if file_verify in self.__opc_valid:
+                        break
+
+            file_retry = str(input('\nDigite novamente o nome do arquivo: '))
+
+            while file_retry != file:
+                print('\nOs nomes não batem digite corretamente!')
+                file_retry = str(input('Digite o nome correto do arquivo: '))
+            return file_retry
+        
+        while True:
+            get_value: str = validation()
+
+            self.__imgc = ImageConverter(get_value)
+            message = self.__imgc.search_file()
+            if isinstance(message, str):
+                print(message)
+                sleep(3)
+                self.__window.clear_terminal()
+                continue
+            
+            verify: bool = self.__imgc.converter()
+            if verify != True:
+                sleep(3)
+                self.__window.clear_terminal()
+                continue
+            else:
+                break
 
     def __home(self):
         self.__window.title(Fore.BLUE + '\033[1mMenu de opções', 11, 35, 25)
@@ -114,7 +153,6 @@ class Main:
         match opc:
             case '1':
                 pass
-
 
     @Calculate_time
     def main(self):
@@ -128,4 +166,4 @@ class Main:
 if __name__ == '__main__':
     main = Main()
     #main.main()
-    main.init_yt()
+    main.init_image_converter()

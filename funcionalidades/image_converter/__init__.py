@@ -7,7 +7,7 @@ path.append(caminho)
 from tratamento import Treatment
 
 from PIL.Image import open as Open
-from os import listdir, rename, mkdir, remove, system
+from os import listdir, rename, mkdir, remove
 
 
 class ImageConverter:
@@ -25,9 +25,9 @@ class ImageConverter:
             self.__extension.remove(f"{self.__file[-1]}")
         else:
             return ('\033[1;31mSua imagem não foi encontrada, ' 
-                  'verifique se realmente está na pasta "input"\033[m')
+                    'verifique se realmente está na pasta "input"\033[m')
 
-    def converter(self):
+    def converter(self) -> bool:
         def move_image() -> None:
             try:
                 rename(self.__file, f'output/{self.__file}')
@@ -39,28 +39,31 @@ class ImageConverter:
                 search: list = listdir('output')
                 if self.__file in search:
                     remove(self.__file)
-                    print('\033[1;31mImagem já existente!\033[m')
+                    print('\n\033[1;31mImagem já existente!\033[m')
 
-        @Treatment.error_treatment(type_of_error=(FileNotFoundError),
-                                   message=(True, '\033[1;31mO arquivo não se encontra mais na pasta "input"\033[m'))
-        def convert() -> None:
+        @self.__trat.error_treatment(type_of_error=(FileNotFoundError),
+                                   message=(True, '\n\033[1;31mO arquivo não se encontra mais na pasta "input"\033[m'))
+        def convert() -> (bool | None):
             self.__file: str = f'{self.__file[0]}.{opc}'
             image = Open(self.__caminho)
             image_convertida = image.convert('RGB')
             image_convertida.save(self.__file)
             move_image()
+            return True
 
         xts: str = ' | '.join(arg for arg in self.__extension)
         while True:
-            opc: str = str(input('Qual tipo de extensão você quer para sua imagem?\n'
+            opc: str = str(input('\nQual tipo de extensão você quer para sua imagem?\n'
                                  f'{xts}\n>> '))
             if opc in xts:
                 break
             else:
-                system('cls')
-                print('\033[1;31mOpção inexistente, escolha uma valida!\033[m')
+                print('\n\033[1;31mOpção inexistente, escolha uma valida!\033[m')
 
-        convert()
+        data = convert()
+        if data is True:
+            return True
+
 
 
 if __name__ == '__main__':
