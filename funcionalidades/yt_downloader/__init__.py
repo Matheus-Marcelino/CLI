@@ -89,8 +89,3 @@ class YouDownTube:
             download()
             print('\033[1;32mDownload Feito com sucesso!\033[m')
             return True
-
-
-if __name__ == '__main__':
-    yt = YouDownTube('https://www.youtube.com/watch?v=07k3exN1DlI')
-    yt.get_request()

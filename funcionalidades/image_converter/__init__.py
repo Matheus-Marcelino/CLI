@@ -63,10 +63,3 @@ class ImageConverter:
         data = convert()
         if data is True:
             return True
-
-
-
-if __name__ == '__main__':
-    imgc = ImageConverter('download.png')
-    imgc.search_file()
-    imgc.converter()

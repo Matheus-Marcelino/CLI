@@ -61,8 +61,3 @@ class ConverterMp3:
             move_file()
         else:
             return False
-
-
-if __name__ == '__main__':
-    conversor = ConverterMp3('amogus')
-    print(conversor.convert_mp3('audio'))
