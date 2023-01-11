@@ -16,11 +16,12 @@ from funcionalidades.image_converter import ImageConverter
 class Main:
     def __init__(self) -> None:
         self.__window = Window()
-        self.__json = JsonManager()
         self.__hash = HashGenerator()
         self.__trat = Treatment()
         self.__opc_valid: tuple[str] = ('Y', 'S', 'YES', 'SIM')
         self.__opc_invalid: tuple[str] =  ('NÃO', 'NAO',  'NO', 'NOT')
+        self.__json = JsonManager()
+        self.__data: dict = self.__json.read()
 
     def __init_music_converter(self):
         def validation():
@@ -105,7 +106,7 @@ class Main:
             if get_value:
                 break
 
-    def init_image_converter(self):
+    def __init_image_converter(self):
         def validation() -> str:
             self.__window.title(Fore.WHITE + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
@@ -146,22 +147,35 @@ class Main:
             else:
                 break
 
-    def __home(self):
+    def __home(self, data: dict):
         self.__window.title(Fore.BLUE + '\033[1mMenu de opções', 11, 35, 25)
         self.__window.table(21)
         opc: str = str(input('qual você deseja usar: '))
         match opc:
             case '1':
+                self.__init_music_converter()
+            case '2':
+                self.__init_video_downloader()
+            case '3':
+                self.__init_image_converter()
+            case '4':
                 pass
+            case '5':
+                return True
 
     @Calculate_time
     def main(self):
         self.__window.clear_terminal()
         while True:
-            data = self.__json.read()
-            self.__home()
-            break
-
+            try:
+                home = self.__home(data)
+                if home:
+                    break
+            except KeyboardInterrupt:
+                print('Volte sempre')
+                sleep(2)
+            finally:
+                self.__json.insert()
 
 if __name__ == '__main__':
     main = Main()
