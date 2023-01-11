@@ -161,7 +161,7 @@ class Main:
             data = self.__json.read()
             self.__home()
             break
-            
+
 
 if __name__ == '__main__':
     main = Main()
