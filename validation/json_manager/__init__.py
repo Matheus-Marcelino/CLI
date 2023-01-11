@@ -8,7 +8,7 @@ class JsonManager():
         self.__path = Path(__file__)
         self.__path = str(self.__path.parent.parent.parent / 'data_info.json')
         self.__recovery_data: dict = {
-                               "time_used":{
+                               "last_boot":{
                                     "last_accessed":{
                                         "date": "dd/mm/aaaa",
                                         "time": "00:00:00"
@@ -16,7 +16,7 @@ class JsonManager():
                                     "usage_time": "00:00:00"
                                     },
                                 "last_used_feature": "",
-                                "message": "normal"
+                                "message": "error"
                             }
 
     def read(self) -> dict:
@@ -43,14 +43,15 @@ if __name__ == '__main__':
     js = JsonManager()
     js.read()
     """js.insert({
-                "time_used":{
-                    "last_accessed":{
-                        "date": "dd/mm/aaaa",
-                        "time": "00:00:00"
+                    "last_boot":{
+                        "last_accessed":{
+                            "date": "dd/mm/aaaa",
+                            "time": "00:00:00"
+                            },
+                        "usage_time": "00:00:00"
                         },
-                    "usage_time": "00:00:00"
-                    },
-                "last_used_feature": ""
+                    "last_used_feature": "",
+                    "message": "error"
                 }
             )
     """

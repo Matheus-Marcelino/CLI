@@ -1,9 +1,11 @@
-from time import sleep
+
 from window import Window
 from colorama import init, Fore
 init(True)
 Window().title(Fore.BLUE + '\033[1mCarregando\033[m', 11, 37, 25)
 
+from time import sleep
+from datetime import datetime
 from validation import Calculate_time 
 from validation.crypt import HashGenerator
 from validation.json_manager import JsonManager
@@ -57,7 +59,7 @@ class Main:
             sleep(3)
             self.__window.clear_terminal()
 
-    def __init_yt(self):
+    def __init_yt_downloader(self):
         def validation() -> str:
             self.__window.title(Fore.WHITE + 'Youtube Downloader', 11, 33, 25)
             link = str(input('Digite o link: ')).strip()
@@ -148,35 +150,59 @@ class Main:
                 break
 
     def __home(self, data: dict):
+        def message() -> None:
+            print(Fore.GREEN + Fore.WHITE + "Entrando...")
+            sleep(1.5)
+            self.__window.clear_terminal()
+
+        def get_hour_and_date() -> tuple:
+            CALENDAR = datetime.today()
+            CURRENT_DATE: str = CALENDAR.strftime('%d/%m/%Y')
+            HOUR: str = CALENDAR.strftime('%H:%M:%S')
+            return (CURRENT_DATE, HOUR)
+
         self.__window.title(Fore.BLUE + '\033[1mMenu de opções', 11, 35, 25)
         self.__window.table(21)
         opc: str = str(input('qual você deseja usar: '))
         match opc:
             case '1':
+                message()
                 self.__init_music_converter()
             case '2':
-                self.__init_video_downloader()
+                message()
+                self.__init_yt_downloader()
             case '3':
+                message()
                 self.__init_image_converter()
             case '4':
                 pass
             case '5':
+                CURRENT_DATE: tuple = get_hour_and_date()
+                self.__data["last_boot"]["last_accessed"]["date"] = CURRENT_DATE[0]
+                self.__data["last_boot"]["last_accessed"]["time"] = CURRENT_DATE[1]
+                if self.__data["message"] == "error":
+                    self.__data["message"] = 'normal'
                 return True
 
     @Calculate_time
-    def main(self):
+    def main(self) -> tuple:
         self.__window.clear_terminal()
         while True:
             try:
-                home = self.__home(data)
+                home = self.__home(self.__data)
                 if home:
                     break
             except KeyboardInterrupt:
-                print('Volte sempre')
-                sleep(2)
+                pass
             finally:
-                self.__json.insert()
+                self.__window.clear_terminal()
+                print(Fore.GREEN + Fore.WHITE + 'Volte sempre!')
+                sleep(2)
+                return self.__data
 
 if __name__ == '__main__':
     main = Main()
-    main.main()
+    DATA: dict = main.main()
+    HOUR: str = str(DATA[1])[:7]
+    DATA[0]["last_boot"]["usage_time"] = HOUR
+    JsonManager().insert(DATA[0])

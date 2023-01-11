@@ -1,11 +1,11 @@
 {
-    "time_used": {
+    "last_boot": {
         "last_accessed": {
-            "date": "dd/mm/aaaa",
+            "date": "dd/mm/yyyy",
             "time": "00:00:00"
         },
         "usage_time": "00:00:00"
     },
     "last_used_feature": "",
-    "message": "error"
+    "message": "normal"
 }
