@@ -37,21 +37,3 @@ class JsonManager():
         """Insere e Atualiza o .json"""
         with open(self.__path, 'w+',encoding='utf-8') as file_json:
             dump(data, file_json, indent=4)
-
-
-if __name__ == '__main__':
-    js = JsonManager()
-    js.read()
-    """js.insert({
-                    "last_boot":{
-                        "last_accessed":{
-                            "date": "dd/mm/aaaa",
-                            "time": "00:00:00"
-                            },
-                        "usage_time": "00:00:00"
-                        },
-                    "last_used_feature": "",
-                    "message": "error"
-                }
-            )
-    """
