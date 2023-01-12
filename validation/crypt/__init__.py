@@ -1,3 +1,4 @@
+"""Hash Generator"""
 from os import mkdir
 from os.path import dirname, realpath, exists
 from hashlib import md5
@@ -7,6 +8,7 @@ from string import ascii_lowercase, ascii_uppercase, punctuation, digits
 
 class HashGenerator:
     def generator_token(self, complexidade: int) -> str:
+        """Gera um token"""
         token = ''.join(choice(ascii_lowercase + ascii_uppercase + digits)for _ in range(int(complexidade)))
         return token
 
@@ -17,9 +19,11 @@ class HashGenerator:
         return text
 
     def one_time_encryption(self, text: str | None, encryption_type: str) -> str:
+        """Criptografia unica, nenhuma pessoa vai ter a mesma criptografia que a sua"""
         def save_path() -> None:
             """Cria o arquivo com a criptografia própria"""
             def auxiliar() -> None:  # escreve o arquvio na primeira inicialização
+                """Auxiliar"""
                 with open(f'{path}\coden\key.txt', 'w+', encoding='utf-8') as file:
                     for digito in digits:
                         file.write(f'{digito}={self.generator_token(complexidade)}\n')
@@ -29,6 +33,7 @@ class HashGenerator:
                         file.write(f'{symbol}={self.generator_token(complexidade)}\n')
 
             def conjunto() -> None:  # reescreve o arquivo quando acionado novamente
+                """Auxiliar"""
                 file.seek(0, 0)
                 for digito in digits:
                     file.write(f'{digito}={self.generator_token(complexidade)}\n')
@@ -54,6 +59,7 @@ class HashGenerator:
             criptografado = ''
 
             def main() -> str:
+                """Criptografador"""
                 nonlocal criptografado
                 with open(f'{path}\coden\key.txt', 'r', encoding='utf-8') as file:
                     for letra in text:
@@ -80,6 +86,7 @@ class HashGenerator:
             mem, mem2 = 0, complexidade
             # {mem, mem2} usado para avançar pela criptografia no tamanho da complexidade
             def main():
+                """Descriptografador"""
                 nonlocal mem, mem2, separador, descriptografado
                 with open(f'{path}\coden\key.txt', 'r', encoding='utf-8') as file:
                     while True:
@@ -119,6 +126,7 @@ class HashGenerator:
             save_path()
 
     def to_output(self, text: str, encryption_type: str) -> None:
+        """Move o arquivo para pasta output"""
         out_path = str(dirname(realpath(__file__)))[:-16]
 
         if not exists(f'{out_path}\output'):
