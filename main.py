@@ -148,7 +148,7 @@ class Main:
             else:
                 break
 
-    def init_hash_generator(self):
+    def __init_hash_generator(self):
         while True:
             self.__window.title(Style.BRIGHT + 'Hash Generator', 11, 35, 25)
             self.__window.table_hash()
@@ -242,7 +242,8 @@ class Main:
                 auxiliary("image_converter")
                 self.__init_image_converter()
             case '4':
-                pass
+                auxiliary("hash_generator")
+                self.__init_hash_generator()
             case '5':
                 CURRENT_DATE: tuple = get_hour_and_date()
                 self.__data["last_boot"]["last_accessed"]["date"] = CURRENT_DATE[0]
@@ -269,7 +270,7 @@ class Main:
 
 if __name__ == '__main__':
     main = Main()
-    main.init_hash_generator()
+    main.main()
     #DATA: dict = main.main()
     #HOUR: str = str(DATA[1])[:7]
     #DATA[0]["last_boot"]["usage_time"] = HOUR
