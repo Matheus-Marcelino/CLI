@@ -1,7 +1,9 @@
+"""Calculo de tempo"""
 from datetime import datetime
 
 
 def Calculate_time(func):
+    """Calcula o tempo da função"""
     def wrapper(*args, **kwgs):
         time_inicial = datetime.now()
 
