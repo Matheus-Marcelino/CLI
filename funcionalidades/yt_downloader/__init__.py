@@ -1,14 +1,8 @@
+
 from pytube import YouTube
 from pytube.exceptions import RegexMatchError
 from urllib.error import URLError
-from pathlib import Path
-from sys import path
-caminho = Path(__file__)
-caminho = caminho.parent.parent.parent / 'error_treatment'
-caminho = str(caminho).replace('\\', '/')
-path.append(caminho)
-from tratamento import Treatment
-
+from os.path import dirname, realpath
 
 class YouDownTube:
     def __init__(self, link: str) -> None:
@@ -16,7 +10,7 @@ class YouDownTube:
         self.__resolutions: tuple[str] = ('720', '480',
                                            '360', '240',
                                            '144')
-        self.__trat = Treatment()
+        self.__caminho: str = dirname(realpath(__file__))[:-29]
 
     def __capsule(self) -> (bool | None):
         try:
@@ -29,9 +23,6 @@ class YouDownTube:
         if not self.__capsule():
             return 'error'
 
-        @self.__trat.error_treatment(type_of_error=(URLError),
-                                   message=(True, '\033[1;31mErro de conexão, '
-                                            'Verifique se você está Online!\033[m'))
         def validation_input():
             nonlocal resolution
             if 'www.youtube.com' not in self.__link[8:23]:
@@ -43,37 +34,40 @@ class YouDownTube:
             if resolution in self.__resolutions and resolution[-1] != 'p':
                 resolution =  resolution + 'p'
 
-            match resolution:
-                case '1':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_lowest_resolution()
-                case '2':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_by_resolution("480p")
-                case '3':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_highest_resolution()
-                case '720p':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_by_resolution('720p')
-                case '480p':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_by_resolution('480p')
-                case '360p':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_by_resolution('360p')
-                case '240p':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_by_resolution('240p')
-                case '144p':
-                    print('\033[1;32mFazendo download do seu video...\033[m')
-                    return self.__yt.streams.get_by_resolution('144p')
-                case _:
-                    print('\033[1;31mEscolha uma resolução válida\033[m')
-                    return 'invalid_resolution'
+            try:
+                match resolution:
+                    case '1':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_lowest_resolution()
+                    case '2':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_by_resolution("480p")
+                    case '3':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_highest_resolution()
+                    case '720p':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_by_resolution('720p')
+                    case '480p':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_by_resolution('480p')
+                    case '360p':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_by_resolution('360p')
+                    case '240p':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_by_resolution('240p')
+                    case '144p':
+                        print('\033[1;32mFazendo download do seu video...\033[m')
+                        return self.__yt.streams.get_by_resolution('144p')
+                    case _:
+                        print('\033[1;31mEscolha uma resolução válida\033[m')
+                        return 'invalid_resolution'
+            except URLError:
+                print('\033[1;31mErro de conexão ou Verifique o seu link!\033[m')
 
         def download() -> None:
-            self.__yt.download(output_path=caminho[:-15] + 'output')
+            self.__yt.download(output_path=self.__caminho + 'output')
 
         self.__yt = validation_input()
         if self.__yt is True:
