@@ -111,9 +111,9 @@ class HashGenerator:
         if not exists(f'{path}\coden'):
             save_path()
 
-        if encryption_type == 'encrypt' and text != None:
+        if encryption_type == 'encrypt' and text is not None:
             return encrypt(text)
-        if encryption_type == 'decrypt' and text != None:
+        if encryption_type == 'decrypt' and text is not None:
             return decrypt(text)
         if encryption_type == 'rewrite' and text is None:
             save_path()

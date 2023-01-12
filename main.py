@@ -48,7 +48,7 @@ class Main:
 
             print()
             self.__mp3 = ConverterMp3(get_value)
-            if self.__mp3.convert_mp3() != False:
+            if self.__mp3.convert_mp3() is not False:
                 self.__window.delay_prompt(3)
                 self.__window.clear_terminal()
                 break
@@ -84,12 +84,13 @@ class Main:
 
                 self.__yt = YouDownTube(link)
                 get_value = self.__yt.get_request(resolution)
-                if get_value != None and get_value is True:
+                if get_value is not None and get_value is True:
                     print('\033[1;32mO download se encontra na pasta "output"\033[m')
                     self.__window.delay_prompt(3)
                     self.__window.clear_terminal()
                     return True
-                elif get_value is False:
+
+                if get_value is False:
                     self.__window.delay_prompt(3)
                     self.__window.clear_terminal()
                 else:
@@ -125,26 +126,25 @@ class Main:
                 print('\nOs nomes não batem digite corretamente!')
                 file_retry = str(input('Digite o nome correto do arquivo: '))
             return file_retry
-        
+
         while True:
             get_value: str = validation()
 
             self.__imgc = ImageConverter(get_value)
-            
+
             verify: bool | str | None = self.__imgc.converter()
             if isinstance(verify, str):
                 print(verify)
                 self.__window.delay_prompt(2)
                 self.__window.clear_terminal()
                 continue
-            elif verify is True:
+            if verify is True:
                 self.__window.delay_prompt(3)
                 self.__window.clear_terminal()
                 break
-            else:
-                self.__window.delay_prompt(2)
-                self.__window.clear_terminal()
-                continue
+
+            self.__window.delay_prompt(2)
+            self.__window.clear_terminal()
 
     def __init_hash_generator(self) -> None:
         while True:

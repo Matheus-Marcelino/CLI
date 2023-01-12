@@ -73,12 +73,15 @@ class YouDownTube:
         if self.__yt is True:
             print('\033[1;31mLink Invalido! Escreva-o de maneira certa.\033[m')
             return 'error'
-        elif self.__yt is False:
+
+        if self.__yt is False:
             print('\033[1;31mO dominio não é do youtube!\033[m')
             return "error domain"
-        elif self.__yt == 'invalid_resolution':
+
+        if self.__yt == 'invalid_resolution':
             return False
-        elif self.__yt != None:
+
+        if self.__yt is not None:
             download()
             print('\033[1;32mDownload Feito com sucesso!\033[m')
             return True

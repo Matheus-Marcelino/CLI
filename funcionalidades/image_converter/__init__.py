@@ -4,7 +4,7 @@ from os.path import dirname, realpath
 
 
 class ImageConverter:
-    def __init__(self, name_file_image: str) -> None:        
+    def __init__(self, name_file_image: str) -> None:
         self.__file: str = name_file_image
         self.__extension: list = ['jpg', 'jpeg', 'png']
         self.__caminho = str(dirname(realpath(__file__)))[:-31] + 'input/' + name_file_image
@@ -16,9 +16,8 @@ class ImageConverter:
             self.__file: list = self.__file.split('.')
             self.__extension.remove(f"{self.__file[-1]}")
             return True
-        else:
-            return ('\033[1;31mSua imagem não foi encontrada, ' 
-                    'verifique se realmente está na pasta "input"\033[m')
+        return ('\033[1;31mSua imagem não foi encontrada, ' 
+                'verifique se realmente está na pasta "input"\033[m')
 
     def converter(self) -> (bool | None | str):
         def move_image() -> None:
@@ -53,8 +52,7 @@ class ImageConverter:
                                     f'{xts}\n>> '))
                 if opc in xts:
                     break
-                else:
-                    print('\n\033[1;31mOpção inexistente, escolha uma valida!\033[m')
+                print('\n\033[1;31mOpção inexistente, escolha uma valida!\033[m')
 
             data = convert()
             if data is True:
