@@ -58,6 +58,3 @@ class ConverterMp3:
             move_file()
         else:
             return False
-
-a = ConverterMp3('come a little closer - cage the elephant (tradução).mp4')
-a.convert_mp3()
