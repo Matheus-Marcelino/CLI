@@ -2,7 +2,6 @@ from pytube import YouTube
 from pytube.exceptions import RegexMatchError
 from urllib.error import URLError
 from pathlib import Path
-from os import system
 from sys import path
 caminho = Path(__file__)
 caminho = caminho.parent.parent.parent / 'error_treatment'
