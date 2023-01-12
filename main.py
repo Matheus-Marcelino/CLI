@@ -271,7 +271,7 @@ class Main:
 if __name__ == '__main__':
     main = Main()
     main.main()
-    #DATA: dict = main.main()
-    #HOUR: str = str(DATA[1])[:7]
-    #DATA[0]["last_boot"]["usage_time"] = HOUR
-    #JsonManager().insert(DATA[0])
+    DATA: dict = main.main()
+    HOUR: str = str(DATA[1])[:7]
+    DATA[0]["last_boot"]["usage_time"] = HOUR
+    JsonManager().insert(DATA[0])
