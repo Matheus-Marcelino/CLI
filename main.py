@@ -207,6 +207,7 @@ class Main:
                                 print(Fore.RED +'Escolha uma opção correta!')
                                 self.__window.delay_prompt(2)
                 case '3':
+                    self.__window.clear_terminal()
                     break
 
                 case _:
@@ -258,18 +259,12 @@ class Main:
             try:
                 home = self.__home()
                 if home:
-                    break
+                    return self.__data
             except KeyboardInterrupt:
-                pass
-            finally:
-                self.__window.clear_terminal()
-                print(Fore.GREEN + Style.BRIGHT + 'Volte sempre!')
-                self.__window.delay_prompt(2)
                 return self.__data
 
 if __name__ == '__main__':
     main = Main()
-    main.main()
     DATA: dict = main.main()
     HOUR: str = str(DATA[1])[:7]
     DATA[0]["last_boot"]["usage_time"] = HOUR
