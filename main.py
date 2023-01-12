@@ -7,7 +7,6 @@ from datetime import datetime
 from validation import Calculate_time 
 from validation.crypt import HashGenerator
 from validation.json_manager import JsonManager
-from error_treatment.tratamento import Treatment
 from funcionalidades.yt_downloader import YouDownTube
 from funcionalidades.mp3_converter import ConverterMp3
 from funcionalidades.image_converter import ImageConverter
@@ -17,7 +16,6 @@ class Main:
     def __init__(self) -> None:
         self.__window = Window()
         self.__hash = HashGenerator()
-        self.__trat = Treatment()
         self.__json = JsonManager()
         self.__data: dict = self.__json.read()
         self.__opc_valid: tuple[str] = ('Y', 'S', 'YES', 'SIM')
