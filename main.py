@@ -13,6 +13,7 @@ from funcionalidades.image_converter import ImageConverter
 
 
 class Main:
+    """Junção de todas as funções para rodar o programa"""
     def __init__(self) -> None:
         self.__window = Window()
         self.__hash = HashGenerator()
@@ -22,7 +23,9 @@ class Main:
         self.__opc_invalid: tuple[str] =  ('NÃO', 'NAO',  'NO', 'NOT')
 
     def __init_music_converter(self) -> None:
+        """Inicia o music converter"""
         def validation():
+            """Etapa de validação"""
             self.__window.title(Style.BRIGHT + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
                   'e de colocar a extensão correta\033[m')
@@ -56,7 +59,9 @@ class Main:
             self.__window.clear_terminal()
 
     def __init_yt_downloader(self) -> None:
+        """Inicia o youtube downloader"""
         def validation() -> str:
+            """Etapa de validação"""
             self.__window.title(Style.BRIGHT + 'Youtube Downloader', 11, 33, 25)
             link = str(input('Digite o link: ')).strip()
             link_verify = str(input(f'O link "{link}" está correto?[Y/N]: ')).upper().strip()
@@ -76,6 +81,7 @@ class Main:
             return link_retry
 
         def get_video() -> bool:
+            """Inicia a procura e o download do video"""
             while True:
                 self.__window.clear_terminal()
                 self.__window.title('Youtube Downloader', 11, 33, 25)
@@ -107,6 +113,7 @@ class Main:
 
     def __init_image_converter(self) -> None:
         def validation() -> str:
+            """Etapa de validação"""
             self.__window.title(Style.BRIGHT + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
                   'e de colocar a extensão correta\033[m')
@@ -215,6 +222,7 @@ class Main:
                     self.__window.clear_terminal()
 
     def __home(self) -> (bool | None):
+        """main menu"""
         def auxiliary(feature: str) -> None:
             self.__data["last_used_feature"] = feature
             print(Fore.GREEN + Style.BRIGHT + "Entrando...")
@@ -253,6 +261,7 @@ class Main:
 
     @Calculate_time
     def main(self) -> tuple:
+        """Inicia o código"""
         while True:
             try:
                 self.__window.clear_terminal()
