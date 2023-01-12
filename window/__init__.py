@@ -11,9 +11,9 @@ class Window:
         sleep(delay)
 
     def title(self, text: str, lenght: int, space: int, dist: int) -> None:
-        print(' ' * dist, Fore.MAGENTA + '=-=' * lenght)
-        print(('' if space == 0 else ' ' * space) , f'{text}')
-        print(' ' * dist, Fore.MAGENTA + '=-=' * lenght)
+        print(' ' * dist, Fore.MAGENTA + Style.BRIGHT + '=-=' * lenght)
+        print(' ' * space , f'{text}')
+        print(' ' * dist, Fore.MAGENTA + Style.BRIGHT + '=-=' * lenght)
         
     def table(self, dist: int) -> None:
         print(' ' * (dist+1), '\033[1m1- Music Converter | 3- Youtube Downloader\n',
