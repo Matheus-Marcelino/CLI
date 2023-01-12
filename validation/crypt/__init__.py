@@ -115,7 +115,7 @@ class HashGenerator:
             return encrypt(text)
         if encryption_type == 'decrypt' and text != None:
             return decrypt(text)
-        if encryption_type == 'rewrite':
+        if encryption_type == 'rewrite' and text is None:
             save_path()
 
     def to_output(self, text: str, encryption_type: str) -> None:
@@ -124,9 +124,9 @@ class HashGenerator:
         if not exists(f'{out_path}\output'):
             mkdir(f'{out_path}\output')
 
-        if not exists(f'{out_path}\output\crypt.txt'):
-            with open(f'{out_path}\output\crypt.txt', 'w+', encoding='utf-8') as file_c:
+        if not exists(f'{out_path}\output\crypto.txt'):
+            with open(f'{out_path}\output\crypto.txt', 'w+', encoding='utf-8') as file_c:
                 file_c.write(f'{encryption_type}: {text}\n')
         else:
-            with open(f'{out_path}\output\crypt.txt', 'a', encoding='utf-8') as file_c:
+            with open(f'{out_path}\output\crypto.txt', 'a', encoding='utf-8') as file_c:
                 file_c.write(f'{encryption_type}: {text}\n')

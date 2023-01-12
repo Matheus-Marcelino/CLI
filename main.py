@@ -1,5 +1,5 @@
 from window import Window
-from colorama import init, Fore
+from colorama import init, Fore, Style
 init(True)
 Window().title(Fore.BLUE + '\033[1mCarregando\033[m', 11, 37, 25)
 
@@ -26,7 +26,7 @@ class Main:
 
     def __init_music_converter(self):
         def validation():
-            self.__window.title(Fore.WHITE + 'Mp3 Converter', 11, 35, 25)
+            self.__window.title(Style.BRIGHT + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
                   'e de colocar a extensão correta\033[m')
             file = str(input('Digite o nome do arquivo: '))
@@ -60,7 +60,7 @@ class Main:
 
     def __init_yt_downloader(self):
         def validation() -> str:
-            self.__window.title(Fore.WHITE + 'Youtube Downloader', 11, 33, 25)
+            self.__window.title(Style.BRIGHT + 'Youtube Downloader', 11, 33, 25)
             link = str(input('Digite o link: ')).strip()
             link_verify = str(input(f'O link "{link}" está correto?[Y/N]: ')).upper().strip()
             
@@ -109,7 +109,7 @@ class Main:
 
     def __init_image_converter(self):
         def validation() -> str:
-            self.__window.title(Fore.WHITE + 'Mp3 Converter', 11, 35, 25)
+            self.__window.title(Style.BRIGHT + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
                   'e de colocar a extensão correta\033[m')
             file = str(input('Digite o nome do arquivo: '))
@@ -150,13 +150,75 @@ class Main:
 
     def init_hash_generator(self):
         while True:
-            self.__window.title(Fore.WHITE + 'Hash Generator', 11, 37, 25)
+            self.__window.title(Style.BRIGHT + 'Hash Generator', 11, 35, 25)
             self.__window.table_hash()
+            type_encrypt = str(input('Escolha: '))
+            match type_encrypt:
+                case '1':
+                    text = str(input('\nDigite o seu texto: '))
+                    hash_md5: str = self.__hash.md5_hash(text)
+                    print(f'O seu hash foi: {Fore.GREEN + hash_md5}')
+                    print(Fore.YELLOW + Style.BRIGHT +'O seu hash se '
+                          'encontra no arquivo "crypto.txt" na pasta "output"')
+                    self.__hash.to_output(hash_md5, 'MD5_Hash')
+                    sleep(3.9)
+                    self.__window.clear_terminal()
 
-    def __home(self, data: dict):
+                case '2':
+                    while True:
+                        self.__window.clear_terminal()
+                        self.__window.title(Style.BRIGHT + 'Criptografia única', 11, 33, 25)
+                        self.__window.sub_table_hash()
+                        single_crypto = str(input('Qual modo você deseja usar: '))
+                        match single_crypto:
+                            case '1':
+                                text = str(input('\nDigite o seu texto: '))
+                                text = self.__hash.one_time_encryption(text, 'encrypt')
+                                print(Style.BRIGHT + f'A sua criptografia é: {Fore.GREEN + text}')
+                                print(Fore.YELLOW + Style.BRIGHT +'A sua criptografia se '
+                                      'encontra no arquivo "crypto.txt" na pasta "output"')
+                                self.__hash.to_output(text, 'Single_Crypto - Encrypt')
+                                sleep(3.9)
+                                self.__window.clear_terminal()
+                                break
+
+                            case '2':
+                                text = str(input('\nDigite o seu texto: '))
+                                text = self.__hash.one_time_encryption(text, 'decrypt')
+                                if text != '':
+                                    print(Style.BRIGHT + f'A sua descriptografia é: {Fore.GREEN + text}')
+                                    print(Fore.YELLOW + Style.BRIGHT +'A sua descriptografia se '
+                                      'encontra no arquivo "crypto.txt" na pasta "output"')
+                                    self.__hash.to_output(text, 'Single_Crypto - Decrypt')
+                                    sleep(3.9)
+                                else:
+                                    print(Fore.RED + Style.BRIGHT + 'Esse texto não bate com a criptografia!')
+                                    sleep(2)
+                                self.__window.clear_terminal()
+                                break
+
+                            case '3':
+                                self.__hash.one_time_encryption(None, 'rewrite')
+                                print('\033[1;33mA sua criptografia mudou! qualquer texto que você tenha\n'
+                                      'criptografado anteriormente não será mais descriptografado\033[m')
+                                sleep(4.3)
+                                self.__window.clear_terminal()
+
+                            case _:
+                                print(Fore.RED +'Escolha uma opção correta!')
+                                sleep(2)
+                case '3':
+                    break
+
+                case _:
+                    print(Fore.RED + 'Escolha uma opção correta!')
+                    sleep(1.3)
+                    self.__window.clear_terminal()
+
+    def __home(self) -> (bool | None):
         def auxiliary(feature: str) -> None:
             self.__data["last_used_feature"] = feature
-            print(Fore.GREEN + Fore.WHITE + "Entrando...")
+            print(Fore.GREEN + Style.BRIGHT + "Entrando...")
             sleep(1.5)
             self.__window.clear_terminal()
 
@@ -194,14 +256,14 @@ class Main:
         self.__window.clear_terminal()
         while True:
             try:
-                home = self.__home(self.__data)
+                home = self.__home()
                 if home:
                     break
             except KeyboardInterrupt:
                 pass
             finally:
                 self.__window.clear_terminal()
-                print(Fore.GREEN + Fore.WHITE + 'Volte sempre!')
+                print(Fore.GREEN + Style.BRIGHT + 'Volte sempre!')
                 sleep(2)
                 return self.__data
 
