@@ -1,3 +1,4 @@
+"""Main"""
 from window import Window
 from colorama import init, Fore, Style
 init(True)
