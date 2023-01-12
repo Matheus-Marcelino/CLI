@@ -1,9 +1,11 @@
+"""Manager json"""
 from pathlib import Path
 from json import load, dump
 from json.decoder import JSONDecodeError
 
 
 class JsonManager():
+    """Gerencia o arquivo json"""
     def __init__(self) -> None:
         self.__path = Path(__file__)
         self.__path = str(self.__path.parent.parent.parent / 'data_info.json')
@@ -20,7 +22,7 @@ class JsonManager():
                             }
 
     def read(self) -> dict:
-        """Lê o arquivo .json"""
+        """Lê o arquivo .json e retorna um objeto python"""
         try:
             with open(self.__path, encoding='utf-8') as file_json:
                 obj_json = load(file_json)
@@ -30,7 +32,7 @@ class JsonManager():
                 dump(self.__recovery_data, file_error_json, indent=4)
 
         with open(self.__path, encoding='utf-8') as file_json:
-                obj_json = load(file_json)
+            obj_json = load(file_json)
         return obj_json
 
     def insert(self, data: dict) -> None:
