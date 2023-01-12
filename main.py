@@ -3,7 +3,6 @@ from colorama import init, Fore, Style
 init(True)
 Window().title(Fore.BLUE + '\033[1mCarregando\033[m', 11, 37, 25)
 
-from time import sleep
 from datetime import datetime
 from validation import Calculate_time 
 from validation.crypt import HashGenerator
@@ -24,7 +23,7 @@ class Main:
         self.__opc_valid: tuple[str] = ('Y', 'S', 'YES', 'SIM')
         self.__opc_invalid: tuple[str] =  ('NÃO', 'NAO',  'NO', 'NOT')
 
-    def __init_music_converter(self):
+    def __init_music_converter(self) -> None:
         def validation():
             self.__window.title(Style.BRIGHT + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
@@ -52,13 +51,13 @@ class Main:
             print()
             self.__mp3 = ConverterMp3(get_value)
             if self.__mp3.convert_mp3() != False:
-                sleep(3)
+                self.__window.delay_prompt(3)
                 self.__window.clear_terminal()
                 break
-            sleep(3)
+            self.__window.delay_prompt(3)
             self.__window.clear_terminal()
 
-    def __init_yt_downloader(self):
+    def __init_yt_downloader(self) -> None:
         def validation() -> str:
             self.__window.title(Style.BRIGHT + 'Youtube Downloader', 11, 33, 25)
             link = str(input('Digite o link: ')).strip()
@@ -89,14 +88,14 @@ class Main:
                 get_value = self.__yt.get_request(resolution)
                 if get_value != None and get_value is True:
                     print('\033[1;32mO download se encontra na pasta "output"\033[m')
-                    sleep(3)
+                    self.__window.delay_prompt(3)
                     self.__window.clear_terminal()
                     return True
                 elif get_value is False:
-                    sleep(3)
+                    self.__window.delay_prompt(3)
                     self.__window.clear_terminal()
                 else:
-                    sleep(3)
+                    self.__window.delay_prompt(3)
                     self.__window.clear_terminal()
                     return False
 
@@ -107,7 +106,7 @@ class Main:
             if get_value:
                 break
 
-    def __init_image_converter(self):
+    def __init_image_converter(self) -> None:
         def validation() -> str:
             self.__window.title(Style.BRIGHT + 'Mp3 Converter', 11, 35, 25)
             print('\n\033[1;33mCertifique-se que o arquivo esteja na pasta "input" '
@@ -136,19 +135,19 @@ class Main:
             message = self.__imgc.search_file()
             if isinstance(message, str):
                 print(message)
-                sleep(3)
+                self.__window.delay_prompt(3)
                 self.__window.clear_terminal()
                 continue
             
             verify: bool = self.__imgc.converter()
             if verify != True:
-                sleep(3)
+                self.__window.delay_prompt(3)
                 self.__window.clear_terminal()
                 continue
             else:
                 break
 
-    def __init_hash_generator(self):
+    def __init_hash_generator(self) -> None:
         while True:
             self.__window.title(Style.BRIGHT + 'Hash Generator', 11, 35, 25)
             self.__window.table_hash()
@@ -161,7 +160,7 @@ class Main:
                     print(Fore.YELLOW + Style.BRIGHT +'O seu hash se '
                           'encontra no arquivo "crypto.txt" na pasta "output"')
                     self.__hash.to_output(hash_md5, 'MD5_Hash')
-                    sleep(3.9)
+                    self.__window.delay_prompt(3.9)
                     self.__window.clear_terminal()
 
                 case '2':
@@ -178,7 +177,7 @@ class Main:
                                 print(Fore.YELLOW + Style.BRIGHT +'A sua criptografia se '
                                       'encontra no arquivo "crypto.txt" na pasta "output"')
                                 self.__hash.to_output(text, 'Single_Crypto - Encrypt')
-                                sleep(3.9)
+                                self.__window.delay_prompt(3.9)
                                 self.__window.clear_terminal()
                                 break
 
@@ -190,10 +189,10 @@ class Main:
                                     print(Fore.YELLOW + Style.BRIGHT +'A sua descriptografia se '
                                       'encontra no arquivo "crypto.txt" na pasta "output"')
                                     self.__hash.to_output(text, 'Single_Crypto - Decrypt')
-                                    sleep(3.9)
+                                    self.__window.delay_prompt(3.9)
                                 else:
                                     print(Fore.RED + Style.BRIGHT + 'Esse texto não bate com a criptografia!')
-                                    sleep(2)
+                                    self.__window.delay_prompt(2)
                                 self.__window.clear_terminal()
                                 break
 
@@ -201,25 +200,25 @@ class Main:
                                 self.__hash.one_time_encryption(None, 'rewrite')
                                 print('\033[1;33mA sua criptografia mudou! qualquer texto que você tenha\n'
                                       'criptografado anteriormente não será mais descriptografado\033[m')
-                                sleep(4.3)
+                                self.__window.delay_prompt(4.3)
                                 self.__window.clear_terminal()
 
                             case _:
                                 print(Fore.RED +'Escolha uma opção correta!')
-                                sleep(2)
+                                self.__window.delay_prompt(2)
                 case '3':
                     break
 
                 case _:
                     print(Fore.RED + 'Escolha uma opção correta!')
-                    sleep(1.3)
+                    self.__window.delay_prompt(1.3)
                     self.__window.clear_terminal()
 
     def __home(self) -> (bool | None):
         def auxiliary(feature: str) -> None:
             self.__data["last_used_feature"] = feature
             print(Fore.GREEN + Style.BRIGHT + "Entrando...")
-            sleep(1.5)
+            self.__window.delay_prompt(1.5)
             self.__window.clear_terminal()
 
         def get_hour_and_date() -> tuple:
@@ -265,7 +264,7 @@ class Main:
             finally:
                 self.__window.clear_terminal()
                 print(Fore.GREEN + Style.BRIGHT + 'Volte sempre!')
-                sleep(2)
+                self.__window.delay_prompt(2)
                 return self.__data
 
 if __name__ == '__main__':
