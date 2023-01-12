@@ -20,7 +20,7 @@ class ImageConverter:
             return ('\033[1;31mSua imagem não foi encontrada, ' 
                     'verifique se realmente está na pasta "input"\033[m')
 
-    def converter(self) -> (bool | str):
+    def converter(self) -> (bool | None | str):
         def move_image() -> None:
             try:
                 rename(self.__file, f'output/{self.__file}')

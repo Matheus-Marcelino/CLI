@@ -130,20 +130,21 @@ class Main:
             get_value: str = validation()
 
             self.__imgc = ImageConverter(get_value)
-            message = self.__imgc.search_file()
-            if isinstance(message, str):
-                print(message)
-                self.__window.delay_prompt(3)
-                self.__window.clear_terminal()
-                continue
             
-            verify: bool = self.__imgc.converter()
-            if verify != True:
-                self.__window.delay_prompt(3)
+            verify: bool | str | None = self.__imgc.converter()
+            if isinstance(verify, str):
+                print(verify)
+                self.__window.delay_prompt(2)
                 self.__window.clear_terminal()
                 continue
-            else:
+            elif verify is True:
+                self.__window.delay_prompt(3)
+                self.__window.clear_terminal()
                 break
+            else:
+                self.__window.delay_prompt(2)
+                self.__window.clear_terminal()
+                continue
 
     def __init_hash_generator(self) -> None:
         while True:
@@ -234,11 +235,11 @@ class Main:
                 auxiliary("music_converter")
                 self.__init_music_converter()
             case '2':
-                auxiliary("yt_downloader")
-                self.__init_yt_downloader()
-            case '3':
                 auxiliary("image_converter")
                 self.__init_image_converter()
+            case '3':
+                auxiliary("yt_downloader")
+                self.__init_yt_downloader()
             case '4':
                 auxiliary("hash_generator")
                 self.__init_hash_generator()
@@ -252,9 +253,9 @@ class Main:
 
     @Calculate_time
     def main(self) -> tuple:
-        self.__window.clear_terminal()
         while True:
             try:
+                self.__window.clear_terminal()
                 home = self.__home()
                 if home:
                     return self.__data
