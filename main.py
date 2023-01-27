@@ -272,6 +272,7 @@ class Main:
             except KeyboardInterrupt:
                 return self.__data
 
+
 if __name__ == '__main__':
     main = Main()
     DATA: dict = main.main()
